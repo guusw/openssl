@@ -76,26 +76,26 @@ alias stack_st _STACK;  /* Use STACK_OF(...) instead */
 int M_sk_num()(_STACK* sk) { return (sk ? sk.num : -1); }
 char* M_sk_value()(_STACK* sk, size_t n) { return (sk ? sk.data[n] : null); }
 
-int sk_num(const(_STACK)*);
-void* sk_value(const(_STACK)*, int);
+int OPENSSL_sk_num(const(_STACK)*);
+void* OPENSSL_sk_value(const(_STACK)*, int);
 
-void* sk_set(_STACK*, int, void*);
+void* OPENSSL_sk_set(_STACK*, int, void*);
 
-_STACK* sk_new(ExternC!(int function(const(void)*, const(void)*)) cmp);
-_STACK* sk_new_null();
-void sk_free(_STACK*);
-void sk_pop_free(_STACK* st, ExternC!(void function(void*)) func);
-int sk_insert(_STACK* sk, void* data, int where);
-void* sk_delete(_STACK* st, int loc);
-void* sk_delete_ptr(_STACK* st, void* p);
-int sk_find(_STACK* st, void* data);
-int sk_find_ex(_STACK* st, void* data);
-int sk_push(_STACK* st, void* data);
-int sk_unshift(_STACK* st, void* data);
-void* sk_shift(_STACK* st);
-void* sk_pop(_STACK* st);
-void sk_zero(_STACK* st);
-int function(const(void)*, const(void)*) sk_set_cmp_func(_STACK* sk, ExternC!(int function(const(void)*, const(void)*)) c);
-_STACK* sk_dup(_STACK* st);
-void sk_sort(_STACK* st);
-int sk_is_sorted(const(_STACK)* st);
+_STACK* OPENSSL_sk_new(ExternC!(int function(const(void)*, const(void)*)) cmp);
+_STACK* OPENSSL_sk_new_null();
+void OPENSSL_sk_free(_STACK*);
+void OPENSSL_sk_pop_free(_STACK* st, ExternC!(void function(void*)) func);
+int OPENSSL_sk_insert(_STACK* sk, void* data, int where);
+void* OPENSSL_sk_delete(_STACK* st, int loc);
+void* OPENSSL_sk_delete_ptr(_STACK* st, void* p);
+int OPENSSL_sk_find(_STACK* st, void* data);
+int OPENSSL_sk_find_ex(_STACK* st, void* data);
+int OPENSSL_sk_push(_STACK* st, void* data);
+int OPENSSL_sk_unshift(_STACK* st, void* data);
+void* OPENSSL_sk_shift(_STACK* st);
+void* OPENSSL_sk_pop(_STACK* st);
+void OPENSSL_sk_zero(_STACK* st);
+int function(const(void)*, const(void)*) OPENSSL_sk_set_cmp_func(_STACK* sk, ExternC!(int function(const(void)*, const(void)*)) c);
+_STACK* OPENSSL_sk_dup(_STACK* st);
+void OPENSSL_sk_sort(_STACK* st);
+int OPENSSL_sk_is_sorted(const(_STACK)* st);

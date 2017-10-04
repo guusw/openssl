@@ -198,15 +198,15 @@ err:\
 		{ M_ASN1_D2I_get_set_type(type,r,func,free_func); }
 
 #define M_ASN1_I2D_len_SET_opt(a,f) \
-	if ((a != NULL) && (sk_num(a) != 0)) \
+	if ((a != NULL) && (OPENSSL_sk_num(a) != 0)) \
 		M_ASN1_I2D_len_SET(a,f);
 
 #define M_ASN1_I2D_put_SET_opt(a,f) \
-	if ((a != NULL) && (sk_num(a) != 0)) \
+	if ((a != NULL) && (OPENSSL_sk_num(a) != 0)) \
 		M_ASN1_I2D_put_SET(a,f);
 
 #define M_ASN1_I2D_put_SEQUENCE_opt(a,f) \
-	if ((a != NULL) && (sk_num(a) != 0)) \
+	if ((a != NULL) && (OPENSSL_sk_num(a) != 0)) \
 		M_ASN1_I2D_put_SEQUENCE(a,f);
 
 #define M_ASN1_I2D_put_SEQUENCE_opt_type(type,a,f) \
@@ -403,7 +403,7 @@ err:\
 					    V_ASN1_UNIVERSAL,IS_SEQUENCE)
 
 #define M_ASN1_I2D_len_SEQUENCE_opt(a,f) \
-		if ((a != NULL) && (sk_num(a) != 0)) \
+		if ((a != NULL) && (OPENSSL_sk_num(a) != 0)) \
 			M_ASN1_I2D_len_SEQUENCE(a,f);
 
 #define M_ASN1_I2D_len_SEQUENCE_opt_type(type,a,f) \
@@ -418,7 +418,7 @@ err:\
 					    V_ASN1_CONTEXT_SPECIFIC,IS_SET);
 
 #define M_ASN1_I2D_len_IMP_SET_opt(a,f,x) \
-		if ((a != NULL) && (sk_num(a) != 0)) \
+		if ((a != NULL) && (OPENSSL_sk_num(a) != 0)) \
 			ret+=i2d_ASN1_SET(a,NULL,f,x,V_ASN1_CONTEXT_SPECIFIC, \
 					  IS_SET);
 
@@ -432,7 +432,7 @@ err:\
 				  IS_SEQUENCE);
 
 #define M_ASN1_I2D_len_IMP_SEQUENCE_opt(a,f,x) \
-		if ((a != NULL) && (sk_num(a) != 0)) \
+		if ((a != NULL) && (OPENSSL_sk_num(a) != 0)) \
 			ret+=i2d_ASN1_SET(a,NULL,f,x,V_ASN1_CONTEXT_SPECIFIC, \
 					  IS_SEQUENCE);
 
@@ -450,14 +450,14 @@ err:\
 			}
 
 #define M_ASN1_I2D_len_EXP_SET_opt(a,f,mtag,tag,v) \
-		if ((a != NULL) && (sk_num(a) != 0))\
+		if ((a != NULL) && (OPENSSL_sk_num(a) != 0))\
 			{ \
 			v=i2d_ASN1_SET(a,NULL,f,tag,V_ASN1_UNIVERSAL,IS_SET); \
 			ret+=ASN1_object_size(1,v,mtag); \
 			}
 
 #define M_ASN1_I2D_len_EXP_SEQUENCE_opt(a,f,mtag,tag,v) \
-		if ((a != NULL) && (sk_num(a) != 0))\
+		if ((a != NULL) && (OPENSSL_sk_num(a) != 0))\
 			{ \
 			v=i2d_ASN1_SET(a,NULL,f,tag,V_ASN1_UNIVERSAL, \
 				       IS_SEQUENCE); \
@@ -503,11 +503,11 @@ err:\
 			    IS_SEQUENCE)
 
 #define M_ASN1_I2D_put_SEQUENCE_opt(a,f) \
-		if ((a != NULL) && (sk_num(a) != 0)) \
+		if ((a != NULL) && (OPENSSL_sk_num(a) != 0)) \
 			M_ASN1_I2D_put_SEQUENCE(a,f);
 
 #define M_ASN1_I2D_put_IMP_SET_opt(a,f,x) \
-		if ((a != NULL) && (sk_num(a) != 0)) \
+		if ((a != NULL) && (OPENSSL_sk_num(a) != 0)) \
 			{ i2d_ASN1_SET(a,&p,f,x,V_ASN1_CONTEXT_SPECIFIC, \
 				       IS_SET); }
 
@@ -518,7 +518,7 @@ err:\
 						 IS_SET); }
 
 #define M_ASN1_I2D_put_IMP_SEQUENCE_opt(a,f,x) \
-		if ((a != NULL) && (sk_num(a) != 0)) \
+		if ((a != NULL) && (OPENSSL_sk_num(a) != 0)) \
 			{ i2d_ASN1_SET(a,&p,f,x,V_ASN1_CONTEXT_SPECIFIC, \
 				       IS_SEQUENCE); }
 
@@ -536,14 +536,14 @@ err:\
 			}
 
 #define M_ASN1_I2D_put_EXP_SET_opt(a,f,mtag,tag,v) \
-		if ((a != NULL) && (sk_num(a) != 0)) \
+		if ((a != NULL) && (OPENSSL_sk_num(a) != 0)) \
 			{ \
 			ASN1_put_object(&p,1,v,mtag,V_ASN1_CONTEXT_SPECIFIC); \
 			i2d_ASN1_SET(a,&p,f,tag,V_ASN1_UNIVERSAL,IS_SET); \
 			}
 
 #define M_ASN1_I2D_put_EXP_SEQUENCE_opt(a,f,mtag,tag,v) \
-		if ((a != NULL) && (sk_num(a) != 0)) \
+		if ((a != NULL) && (OPENSSL_sk_num(a) != 0)) \
 			{ \
 			ASN1_put_object(&p,1,v,mtag,V_ASN1_CONTEXT_SPECIFIC); \
 			i2d_ASN1_SET(a,&p,f,tag,V_ASN1_UNIVERSAL,IS_SEQUENCE); \

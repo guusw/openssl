@@ -131,47 +131,47 @@ mixin DECLARE_SPECIAL_STACK_OF!(OPENSSL_BLOCK, void);
 /* SKM_sk_... stack macros are internal to safestack.h:
  * never use them directly, use sk_<type>_... instead */
 template SKM_sk_new(type) { STACK_OF!type* SKM_sk_new()(ExternC!(int function(const(type*)*, const(type*)*)) cmp)
-	{ return cast(STACK_OF!type*)sk_new(CHECKED_SK_CMP_FUNC(cmp)); }}
+	{ return cast(STACK_OF!type*)OPENSSL_sk_new(CHECKED_SK_CMP_FUNC(cmp)); }}
 template SKM_sk_new_null(type) { STACK_OF!type* SKM_sk_new_null()()
-	{ return cast(STACK_OF!type*)sk_new_null(); }}
+	{ return cast(STACK_OF!type*)OPENSSL_sk_new_null(); }}
 template SKM_sk_free(type) { void SKM_sk_free()(STACK_OF!type* st)
-	{ sk_free(CHECKED_STACK_OF!type(st)); }}
+	{ OPENSSL_sk_free(CHECKED_STACK_OF!type(st)); }}
 template SKM_sk_num(type) { int SKM_sk_num()(STACK_OF!type* st)
-	{ return sk_num(CHECKED_STACK_OF!type(st)); }}
+	{ return OPENSSL_sk_num(CHECKED_STACK_OF!type(st)); }}
 template SKM_sk_value(type) { type* SKM_sk_value()(STACK_OF!type* st, int i)
-	{ return cast(type*)sk_value(CHECKED_STACK_OF!type(st), i); }}
+	{ return cast(type*)OPENSSL_sk_value(CHECKED_STACK_OF!type(st), i); }}
 template SKM_sk_set(type) { type* SKM_sk_set()(STACK_OF!type* st, int i, type* val)
-	{ return cast(type*)sk_set(CHECKED_STACK_OF!type(st), i, CHECKED_PTR_OF(val)); }}
+	{ return cast(type*)OPENSSL_sk_set(CHECKED_STACK_OF!type(st), i, CHECKED_PTR_OF(val)); }}
 template SKM_sk_zero(type) { void SKM_sk_zero()(STACK_OF!type* st)
-	{ sk_zero(CHECKED_STACK_OF!type(st)); }}
+	{ OPENSSL_sk_zero(CHECKED_STACK_OF!type(st)); }}
 template SKM_sk_push(type) { int SKM_sk_push()(STACK_OF!type* st, type* val)
-	{ return sk_push(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF(val)); }}
+	{ return OPENSSL_sk_push(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF(val)); }}
 template SKM_sk_unshift(type) { int SKM_sk_unshift()(STACK_OF!type* st, type* val)
-	{ return sk_unshift(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF(val)); }}
+	{ return OPENSSL_sk_unshift(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF(val)); }}
 template SKM_sk_find(type) { int SKM_sk_find()(STACK_OF!type* st, type* val)
-	{ return sk_find(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF!type(val)); }}
+	{ return OPENSSL_sk_find(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF!type(val)); }}
 template SKM_sk_find_ex(type) { int SKM_sk_find_ex()(STACK_OF!type* st, type* val)
-	{ return sk_find_ex(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF!type(val)); }}
+	{ return OPENSSL_sk_find_ex(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF!type(val)); }}
 template SKM_sk_delete(type) { type* SKM_sk_delete()(STACK_OF!type* st, int i)
-	{ return cast(type*)sk_delete(CHECKED_STACK_OF!type(st), i); }}
+	{ return cast(type*)OPENSSL_sk_delete(CHECKED_STACK_OF!type(st), i); }}
 template SKM_sk_delete_ptr(type) { type* SKM_sk_delete_ptr()(STACK_OF!type* st, type* ptr)
-	{ return cast(type*)sk_delete_ptr(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF!type(ptr)); }}
+	{ return cast(type*)OPENSSL_sk_delete_ptr(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF!type(ptr)); }}
 template SKM_sk_insert(type) { int SKM_sk_insert()(STACK_OF!type* st,type* val, int i)
-	{ return sk_insert(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF!type(val), i); }}
+	{ return OPENSSL_sk_insert(CHECKED_STACK_OF!type(st), CHECKED_PTR_OF!type(val), i); }}
 template SKM_sk_set_cmp_func(type) { ExternC!(int function(const(type*)*, const(type*)*)) SKM_sk_set_cmp_func(type)(STACK_OF!type* st, int function(const(type*)*, const(type*)*) cmp)
-	{ return cast(typeof(return))sk_set_cmp_func(CHECKED_STACK_OF!type(st), CHECKED_SK_CMP_FUNC(cmp)); }}
+	{ return cast(typeof(return))OPENSSL_sk_set_cmp_func(CHECKED_STACK_OF!type(st), CHECKED_SK_CMP_FUNC(cmp)); }}
 template SKM_sk_dup(type) { STACK_OF!type* SKM_sk_dup()(STACK_OF!type* st)
-	{ return cast(STACK_OF!type*)sk_dup(CHECKED_STACK_OF!type(st)); }}
+	{ return cast(STACK_OF!type*)OPENSSL_sk_dup(CHECKED_STACK_OF!type(st)); }}
 template SKM_sk_pop_free(type) { void SKM_sk_pop_free()(STACK_OF!type* st, ExternC!(void function(type*)) free_func)
-	{ return sk_pop_free(CHECKED_STACK_OF!type(st), CHECKED_SK_FREE_FUNC!type(free_func)); }}
+	{ return OPENSSL_sk_pop_free(CHECKED_STACK_OF!type(st), CHECKED_SK_FREE_FUNC!type(free_func)); }}
 template SKM_sk_shift(type) { type* SKM_sk_shift()(STACK_OF!type* st)
-	{ return cast(type*)sk_shift(CHECKED_STACK_OF!type(st)); }}
+	{ return cast(type*)OPENSSL_sk_shift(CHECKED_STACK_OF!type(st)); }}
 template SKM_sk_pop(type) { type* SKM_sk_pop()(STACK_OF!type* st)
-	{ return cast(type*)sk_pop(CHECKED_STACK_OF!type(st)); }}
+	{ return cast(type*)OPENSSL_sk_pop(CHECKED_STACK_OF!type(st)); }}
 template SKM_sk_sort(type) { void SKM_sk_sort()(STACK_OF!type* st)
-	{ sk_sort(CHECKED_STACK_OF!type(st)); }}
+	{ OPENSSL_sk_sort(CHECKED_STACK_OF!type(st)); }}
 template SKM_sk_is_sorted(type) { int SKM_sk_is_sorted()(STACK_OF!type* st)
-	{ return sk_is_sorted(CHECKED_STACK_OF!type(st)); }}
+	{ return OPENSSL_sk_is_sorted(CHECKED_STACK_OF!type(st)); }}
 
 template SKM_ASN1_SET_OF_d2i(type) {
 	STACK_OF!type* SKM_ASN1_SET_OF_d2i()(STACK_OF!type** st,
@@ -2204,27 +2204,27 @@ alias SKM_sk_sort!OPENSSL_BLOCK sk_OPENSSL_BLOCK_sort;
 alias SKM_sk_is_sorted!OPENSSL_BLOCK sk_OPENSSL_BLOCK_is_sorted;
 
 /+ TODO
-#define sk_OPENSSL_PSTRING_new(cmp) ((STACK_OF(OPENSSL_PSTRING) *)sk_new(CHECKED_SK_CMP_FUNC(OPENSSL_STRING, cmp)))
-#define sk_OPENSSL_PSTRING_new_null() ((STACK_OF(OPENSSL_PSTRING) *)sk_new_null())
-#define sk_OPENSSL_PSTRING_push(st, val) sk_push(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_PTR_OF(OPENSSL_STRING, val))
-#define sk_OPENSSL_PSTRING_find(st, val) sk_find(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_PTR_OF(OPENSSL_STRING, val))
-#define sk_OPENSSL_PSTRING_value(st, i) ((OPENSSL_PSTRING)sk_value(CHECKED_STACK_OF(OPENSSL_PSTRING, st), i))
+#define sk_OPENSSL_PSTRING_new(cmp) ((STACK_OF(OPENSSL_PSTRING) *)OPENSSL_sk_new(CHECKED_SK_CMP_FUNC(OPENSSL_STRING, cmp)))
+#define sk_OPENSSL_PSTRING_new_null() ((STACK_OF(OPENSSL_PSTRING) *)OPENSSL_sk_new_null())
+#define sk_OPENSSL_PSTRING_push(st, val) OPENSSL_sk_push(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_PTR_OF(OPENSSL_STRING, val))
+#define sk_OPENSSL_PSTRING_find(st, val) OPENSSL_sk_find(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_PTR_OF(OPENSSL_STRING, val))
+#define sk_OPENSSL_PSTRING_value(st, i) ((OPENSSL_PSTRING)OPENSSL_sk_value(CHECKED_STACK_OF(OPENSSL_PSTRING, st), i))
 #define sk_OPENSSL_PSTRING_num(st) SKM_sk_num(OPENSSL_PSTRING, st)
-#define sk_OPENSSL_PSTRING_pop_free(st, free_func) sk_pop_free(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_SK_FREE_FUNC2(OPENSSL_PSTRING, free_func))
-#define sk_OPENSSL_PSTRING_insert(st, val, i) sk_insert(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_PTR_OF(OPENSSL_STRING, val), i)
+#define sk_OPENSSL_PSTRING_pop_free(st, free_func) OPENSSL_sk_pop_free(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_SK_FREE_FUNC2(OPENSSL_PSTRING, free_func))
+#define sk_OPENSSL_PSTRING_insert(st, val, i) OPENSSL_sk_insert(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_PTR_OF(OPENSSL_STRING, val), i)
 #define sk_OPENSSL_PSTRING_free(st) SKM_sk_free(OPENSSL_PSTRING, st)
-#define sk_OPENSSL_PSTRING_set(st, i, val) sk_set(CHECKED_STACK_OF(OPENSSL_PSTRING, st), i, CHECKED_PTR_OF(OPENSSL_STRING, val))
+#define sk_OPENSSL_PSTRING_set(st, i, val) OPENSSL_sk_set(CHECKED_STACK_OF(OPENSSL_PSTRING, st), i, CHECKED_PTR_OF(OPENSSL_STRING, val))
 #define sk_OPENSSL_PSTRING_zero(st) SKM_sk_zero(OPENSSL_PSTRING, (st))
-#define sk_OPENSSL_PSTRING_unshift(st, val) sk_unshift(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_PTR_OF(OPENSSL_STRING, val))
-#define sk_OPENSSL_PSTRING_find_ex(st, val) sk_find_ex((_STACK *)CHECKED_CONST_PTR_OF(STACK_OF(OPENSSL_PSTRING), st), CHECKED_CONST_PTR_OF(OPENSSL_STRING, val))
+#define sk_OPENSSL_PSTRING_unshift(st, val) OPENSSL_sk_unshift(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_PTR_OF(OPENSSL_STRING, val))
+#define sk_OPENSSL_PSTRING_find_ex(st, val) OPENSSL_sk_find_ex((_STACK *)CHECKED_CONST_PTR_OF(STACK_OF(OPENSSL_PSTRING), st), CHECKED_CONST_PTR_OF(OPENSSL_STRING, val))
 #define sk_OPENSSL_PSTRING_delete(st, i) SKM_sk_delete(OPENSSL_PSTRING, (st), (i))
-#define sk_OPENSSL_PSTRING_delete_ptr(st, ptr) (OPENSSL_PSTRING *)sk_delete_ptr(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_PTR_OF(OPENSSL_STRING, ptr))
+#define sk_OPENSSL_PSTRING_delete_ptr(st, ptr) (OPENSSL_PSTRING *)OPENSSL_sk_delete_ptr(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_PTR_OF(OPENSSL_STRING, ptr))
 #define sk_OPENSSL_PSTRING_set_cmp_func(st, cmp)  \
 	((int (*)(const OPENSSL_STRING * const *,const OPENSSL_STRING * const *)) \
-	sk_set_cmp_func(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_SK_CMP_FUNC(OPENSSL_STRING, cmp)))
+	OPENSSL_sk_set_cmp_func(CHECKED_STACK_OF(OPENSSL_PSTRING, st), CHECKED_SK_CMP_FUNC(OPENSSL_STRING, cmp)))
 #define sk_OPENSSL_PSTRING_dup(st) SKM_sk_dup(OPENSSL_PSTRING, st)
 #define sk_OPENSSL_PSTRING_shift(st) SKM_sk_shift(OPENSSL_PSTRING, (st))
-#define sk_OPENSSL_PSTRING_pop(st) (OPENSSL_STRING *)sk_pop(CHECKED_STACK_OF(OPENSSL_PSTRING, st))
+#define sk_OPENSSL_PSTRING_pop(st) (OPENSSL_STRING *)OPENSSL_sk_pop(CHECKED_STACK_OF(OPENSSL_PSTRING, st))
 #define sk_OPENSSL_PSTRING_sort(st) SKM_sk_sort(OPENSSL_PSTRING, (st))
 #define sk_OPENSSL_PSTRING_is_sorted(st) SKM_sk_is_sorted(OPENSSL_PSTRING, (st))
 +/
